@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 
+	"github.com/Pong-Kantapon/taskmanager/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -10,13 +11,17 @@ import (
 var DB *gorm.DB
 
 func ConnectDatabase() {
-	dsn := "host=localhost user=postgres password=Kantapon4444# dbname=taskmanager_db port=5432 sslmode=disable"
+	cfg := config.GetConfig()
+	dsn := fmt.Sprintf(
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
+		cfg.DBHost, cfg.DBUser, cfg.DBPassword, cfg.DBName, cfg.DBPort,
+	)
 
 	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic("Failed to connect to database")
+		panic("Failed to connect to database!")
 	}
 
 	DB = database
-	fmt.Println("Database connected")
+	fmt.Println("Database connected successfully!")
 }
