@@ -47,7 +47,7 @@ func UpdateTask(c *gin.Context) {
 		return
 	}
 
-	var input models.Task
+	var input map[string]interface{}
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
