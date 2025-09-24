@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/Pong-Kantapon/taskmanager/database"
 	"github.com/Pong-Kantapon/taskmanager/models"
+	"github.com/Pong-Kantapon/taskmanager/routes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,9 +18,7 @@ func main() {
 	//create Gin router
 	r := gin.Default()
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "APIs avaliable"})
-	})
+	routes.SetupRoutes(r)
 
 	//Localhost
 	r.Run(":8080")
